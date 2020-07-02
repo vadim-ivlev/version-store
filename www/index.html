@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log chart</title>
+    <link rel="icon" type="image/x-icon" href="/www/favicon.ico"/>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="cont">
+        <h2> Пример запросов к Elasticsearch </h2>
+    </div>
+
+    <script>
+        // Конечная точка Elasticsearch 
+        const url = "https://log-monitor.rg.ru/elasticsearch/_sql?format=json"
+        
+        // Запрос который будем выполнять
+        const query = { query: `
+        SELECT HISTOGRAM("@timestamp", INTERVAL 30 SECOND) as interval, 
+        count(*) as count
+        FROM "log-generator-logrus*"
+        GROUP by interval
+        ORDER BY interval DESC
+        LIMIT 30        
+        ` }
+
+
+        // выполняет запрос к эластик
+        async function doQuery(url, query) {
+            var res = await fetch(url, { 
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(query),
+            })
+            var data = await res.json()
+            // showPlot(document.getElementById('chart-response'), data)
+        }
+
+        
+        // делаем запросы каждые 3 сек
+        var reqInterval = setInterval(()=> doQuery(url,query), 3000)
+        doQuery(url,query)
+    </script>
+
+</body>
+</html>

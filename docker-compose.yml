@@ -1,0 +1,87 @@
+# Этот файл реализует мониторинг логов приложений 
+# используя кластер Elasticsearch 
+
+
+version: '3'
+services:
+  # Кластер elasticsearch
+  # E L A S T I C S E A R C H   C L U S T E R  B E G I N -----------------------------------------------------------
+  # Здесь определен только один узел кластера.
+  # Пример кластера из нескольких узлов смотри в проекте l
+  es-version-store-01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    container_name: es-version-store-01
+    restart: unless-stopped
+    environment:
+      - node.name=es-version-store-node-01
+      - cluster.name=es-version-store-cluster
+      # - discovery.seed_hosts=es02,es03
+      # - cluster.initial_master_nodes=es01,es02,es03
+      # - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # добавить это к каждой службе эластик если свободного места на диске < 10%
+      # в противном случае шарды не будут двигаться
+      # - cluster.routing.allocation.disk.threshold_enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    # Прямой порт скрываем чтобы не было конфликтов с другими Эластиками
+    # Весь доступ пускаем через Caddy
+    # ports:
+    #   - 9200:9200
+    volumes:
+      - es-version-store-data-01:/usr/share/elasticsearch/data
+
+  # E L A S T I C S E A R C H   C L U S T E R  E N D -----------------------------------------------------------
+  
+  
+  
+  # Kibana. Визуализация данных elasticsearch
+  version-store-kibana:
+    image: docker.elastic.co/kibana/kibana:7.7.0
+    container_name: version-store-kibana
+    restart: unless-stopped
+    # Прямой порт скрываем чтобы не было конфликтов с другими Кибанами
+    # Весь доступ пускаем через Caddy
+    # ports:
+    #   - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://es01:9200"]'
+  
+  # Cerebro. Визуализация кластера elasticsearch
+  version-store-cerebro:
+    image: lmenezes/cerebro
+    container_name: version-store-cerebro
+    restart: unless-stopped
+    # left to try through auth-proxy
+    # ports:
+    #   - 9000:9000
+    environment:
+      CEREBRO_PORT: 9000
+    
+
+  # Caddy HTTP сервер, добавлен для базовой аутентификации к Кибане
+  # и ограничения доступа к elasticsearch со стороны внешних программ.
+  # Параметры проксирования определены в Caddyfile
+  version-store-caddy:
+    image: caddy:2.0.0-alpine
+    container_name: version-store-caddy
+    restart: unless-stopped
+    ports:
+      - '9096:8080'
+    volumes:
+      - ./configs/Caddyfile:/etc/caddy/Caddyfile
+      - ./www:/www
+
+
+# volumes for Elasticsearch data and Portainer
+volumes:
+  es-version-store-data-01:
+
+# outer network to communicate with other services 
+networks:
+    default:
+      external:
+        name: auth_proxy_network

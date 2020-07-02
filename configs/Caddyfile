@@ -1,0 +1,61 @@
+
+# Публичный сервер version-store.rg.ru
+:8080 {
+    # Кросдоменность
+    header * {
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Headers *
+    }
+
+    # Матчер @auth включает все маршруты за исключением  www
+    @auth {
+        not path /www*
+        not path /elasticsearch/*
+    }
+
+    # Базовая аутентификация распространяется на все маршруты определенные в матчере @auth
+    basicauth @auth {
+        admin JDJhJDEwJDhPZzNWMkZoeXlxVHgyZzNmcmY4ZC5GM1prSktvODlLN05jOUozamNvbGR3YnhvWnRubjhl
+    }
+    
+    @elasticsearch_get {
+        method GET OPTIONS
+        path /elasticsearch/* 
+    }
+
+    @elasticsearch_sql {
+        method POST OPTIONS
+        path /elasticsearch/_sql* 
+    }
+    
+    # маршрут elasticsearch без аутентификации
+    route @elasticsearch_get {
+        uri strip_prefix /elasticsearch
+        reverse_proxy  es-version-store-01:9200 
+    }
+
+    # маршрут elasticsearch без аутентификации
+    route @elasticsearch_sql {
+        uri strip_prefix /elasticsearch
+        reverse_proxy  es-version-store-01:9200 
+    }
+
+
+    # маршрут статического сайта
+    route /www* {
+        # root * /
+        file_server  browse
+    }
+
+
+    # маршрут cerebro, контроль кластера elasticsearch с базовой аутентификацией
+    route /cerebro/* {
+        uri strip_prefix /cerebro
+        reverse_proxy version-store-cerebro:9000 
+    }
+
+    # Kibana. Корневой маршрут с базовой аутентификацией
+    route * {
+        reverse_proxy version-store-kibana:5601     
+    }    
+}
