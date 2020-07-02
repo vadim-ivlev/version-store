@@ -31,13 +31,13 @@
     # маршрут elasticsearch без аутентификации
     route @elasticsearch_get {
         uri strip_prefix /elasticsearch
-        reverse_proxy  es-version-store-01:9200 
+        reverse_proxy  version-store-es01:9200 
     }
 
     # маршрут elasticsearch без аутентификации
     route @elasticsearch_sql {
         uri strip_prefix /elasticsearch
-        reverse_proxy  es-version-store-01:9200 
+        reverse_proxy  version-store-es01:9200 
     }
 
 
