@@ -69,8 +69,11 @@ POST _sql?format=txt
   limit 40
   """
 }
+
 # curl -XPOST "https://version-store.rg.ru/elasticsearch/_sql?format=txt" \
+
 # -H 'Content-Type: application/json' \
+
 # -d'{  "query": "SELECT *  FROM \"log-generator-logrus*\"  LIMIT 40"}'
 
 

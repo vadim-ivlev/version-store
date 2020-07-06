@@ -19,7 +19,8 @@
     }
     
     @elasticsearch_get {
-        method GET OPTIONS
+        # method GET OPTIONS
+        method GET OPTIONS POST DELETE PUT
         path /elasticsearch/* 
     }
 

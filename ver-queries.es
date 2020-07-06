@@ -1,5 +1,5 @@
 
-GET _cat/indices?v
+GET _cat/indices?v&format=txt
 
 DELETE articles
 
@@ -9,11 +9,13 @@ PUT articles/_mapping
 {
     "dynamic": false,
     "properties": {
-      "id":     { "type": "keyword"  }, 
-      "author": { "type": "text"  },
-      "time" :  { "type" : "date", "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis" }
+      "id":             { "type": "long" }, 
+      "type":           { "type": "keyword" },
+      "version_time" :  { "type": "date" }
     }
 }
+
+// "version_time" :  { "type" : "date", "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis" }
 
 GET articles/_mapping
 
@@ -55,6 +57,22 @@ PUT /articles
       "version_time" :  { "type" : "date" }
     }
   }
+}
+
+POST _sql?format=txt
+{
+  "query": """
+  SELECT version_time, id, url FROM "doc_versions"
+  ORDER BY version_time DESC
+  """
+}
+
+POST _sql/translate
+{
+  "query": """
+  SELECT version_time FROM "doc_versions"
+  ORDER BY version_time DESC
+  """
 }
 
 
