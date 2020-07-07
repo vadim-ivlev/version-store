@@ -1,0 +1,35 @@
+# Этот файл стартует локальные версии kibana и cerebro 
+# Для более удобной работы c Эластик
+
+
+version: '3'
+services:
+  
+  
+  # Kibana. Визуализация данных elasticsearch
+  version-store-kibana:
+    image: docker.elastic.co/kibana/kibana:7.7.0
+    container_name: version-store-kibana
+    restart: unless-stopped
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://version-store-es01:9200"]'
+  
+  # Cerebro. Визуализация кластера elasticsearch
+  version-store-cerebro:
+    image: lmenezes/cerebro
+    container_name: version-store-cerebro
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+    environment:
+      CEREBRO_PORT: 9000
+    
+
+
+# outer network to communicate with other services 
+networks:
+    default:
+      external:
+        name: auth_proxy_network

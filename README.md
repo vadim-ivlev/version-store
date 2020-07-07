@@ -176,3 +176,22 @@ https://docs.google.com/document/d/1Q1ExyY36btdnTNe5co_pB4UdWNk41gY3rP1geg1LJBo/
 dc restart version-store-caddy  
 dc up -d --build version-store-caddy     
 ```
+
+
+## Инициализация базы данных
+
+Следующие команды выполняются после того, как Эластик стартовал, на хосте где запущен докер.
+Во время  разработки это будет ваша локальная машина, после размещения на сервере -  этот сервер.
+
+Чтобы удалить базу данных версий Документов выполните следующую команду.
+```
+docker exec version-store-es01  bash -c 'cd /migrations;./delete_index.sh'
+```
+Чтобы породить новую базу данных и наполнить её тестовыми данными выполните следующую команду
+```
+docker exec version-store-es01  bash -c 'cd /migrations;./init_index.sh'
+```
+
+Чтобы убедиться что тестовые данные порожденны нормально на локальном компьютере в браузере откройте
+
+<http://localhost:9000/#/overview?host=http:%2F%2Fversion-store-es01:9200>

@@ -2,11 +2,11 @@
 
 # Наполняет индекс тестовыми документами
 
-URL="localhost:9096/elasticsearch/doc_versions"
+URL="localhost:9200"
 HEADER="Content-Type: application/json"
 
 # Загружаем тестовые данные
-curl -s -XPOST "$URL/_bulk?refresh=true" -H "$HEADER" --data-binary "@doc_examples.json"  > /dev/null
+curl -s -XPOST "$URL/doc_versions/_bulk?refresh=true" -H "$HEADER" --data-binary "@doc_examples.json"  > /dev/null
 # Показываем перечень индексов
-curl -s "localhost:9096/elasticsearch/_cat/indices?v&format=txt"
+curl -s "$URL/_cat/indices?format=txt"
 

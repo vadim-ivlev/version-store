@@ -2,11 +2,18 @@
 
 # Порождает индекс и инициализирует маппинг.
 
-URL="localhost:9096/elasticsearch/doc_versions"
+URL="localhost:9200/doc_versions"
 HEADER="Content-Type: application/json"
 
-curl -s -XDELETE "$URL" > /dev/null
+# echo "deleting index doc_versions--------------------------------------"
+# curl -s -XDELETE "$URL" > /dev/null
+
+echo
+echo "creaing index doc_versions -------------------------------------"
 curl  -XPUT "$URL" -H "$HEADER" 
+
+echo
+echo "creating mapping for index doc_versions--------------------------"
 curl  -XPUT "$URL/_mapping?pretty" -H "$HEADER" -d'{
     "dynamic": false,
     "properties": {
