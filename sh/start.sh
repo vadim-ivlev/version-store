@@ -2,14 +2,13 @@
 
 
 
-echo "Starting stopped containers..."
+echo "Стартуем осстановленные контейнеры..."
 
 docker-compose start
 
+# Если предыдущая команда выполнилась удачно печатаем приглашение.
 if [ $? -eq 0 ]; then
-    echo OK
+    sh/greetings.sh
 else
-    echo FAIL
+    echo "НЕ удалость стартовать сервисы."
 fi
-# поясняем
-sh/greetings.sh

@@ -1,14 +1,13 @@
 #!/bin/bash
 
 
-echo "поднимаем" 
+echo "Запускаем контейнеры" 
 docker-compose up -d
 
+# Если предыдущая команда выполнилась удачно печатаем приглашение.
 if [ $? -eq 0 ]; then
-    echo OK
+    sh/greetings.sh
 else
-    echo FAIL
+    echo "Ошибка запуска контейнеров"
 fi
 
-echo "поясняем"
-sh/greetings.sh

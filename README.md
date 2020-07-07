@@ -161,10 +161,11 @@ https://docs.google.com/document/d/1Q1ExyY36btdnTNe5co_pB4UdWNk41gY3rP1geg1LJBo/
 
 |   |   |
 |---|---|
-Подъем                                      | `sh/up.sh`
+Запуск                                      | `sh/up.sh`
+Полный останов                              | `sh/down.sh`
+Печать пригласительного сообщения           | `sh/greetings.sh`
 Приостановка контейнера                     | `sh/stop.sh`
 Старт приостановленного контейнера          | `sh/start.sh`
-Полный останов контейнера                   | `sh/down.sh`
 Подготовка директории deploy                | `sh/build-deploy-directory.sh`
 Деплой                                      | `sh/deploy.sh`
 

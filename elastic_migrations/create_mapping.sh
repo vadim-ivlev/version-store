@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Порождает индекс и инициализирует маппинг.
+
 URL="localhost:9096/elasticsearch/doc_versions"
 HEADER="Content-Type: application/json"
 

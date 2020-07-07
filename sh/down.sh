@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "гасим" 
+echo "гасим контейнеры" 
 docker-compose down
