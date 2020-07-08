@@ -168,4 +168,9 @@ docker exec version-store-es01  bash -c 'cd /migrations;./init_index.sh'
 
 <http://localhost:9000/#/overview?host=http:%2F%2Fversion-store-es01:9200>
 
-t
+<script>
+function hello(){
+    alert('hello)
+}
+</script>
+<button onclick="hello()">bbb<button>
