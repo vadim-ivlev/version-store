@@ -174,3 +174,4 @@ function hello(){
 }
 </script>
 <button onclick="hello()">bbb<button>
+<a href="javascript: alert('hello)">hello</a>
