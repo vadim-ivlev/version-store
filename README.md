@@ -195,3 +195,5 @@ docker exec version-store-es01  bash -c 'cd /migrations;./init_index.sh'
 Чтобы убедиться что тестовые данные порожденны нормально на локальном компьютере в браузере откройте
 
 <http://localhost:9000/#/overview?host=http:%2F%2Fversion-store-es01:9200>
+
+t
