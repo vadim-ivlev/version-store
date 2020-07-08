@@ -38,6 +38,11 @@ POST doc_versions/_doc/
 
 GET doc_versions/_search?q=(type:info)&sort=version_time:desc
 
+
+# https://auth-proxy.rg.ru/apps/version-store/doc_versions/_search?pretty&q=(type:info)&sort=version_time:desc
+
+
+
 GET doc_versions/_search?q=(type:material)AND(id:4899)&size=2&sort=version_time:desc&_source=type,id,version_time,title,editor
 
 # Получить документ по его идентификатору
@@ -47,6 +52,8 @@ GET doc_versions/_search?q=_id:1x0jJXMBlIl0j5pGmEbq
 # _doc API
 # Получить документ по его идентификатору
 GET doc_versions/_doc/1x0jJXMBlIl0j5pGmEbq
+
+# https://auth-proxy.rg.ru/apps/version-store/doc_versions/_doc/ufmULnMB7-Vwr_C2r4CJ?pretty
 
 
 GET doc_versions/_search
