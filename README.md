@@ -31,7 +31,7 @@ version-store
 API сервиса должен включать возможности 1) показа списка сохранённых версий, 2) извлечения отдельной версии документа, и 3) сохранения новой версии.
 
 <!-- <div style="text-align:center"> -->
-<img src="images/version-store-schema.jpg" style="max-width:500px">
+<img src="images/version-store-schema1.jpg" style="max-width:600px">
 <!-- </div> -->
 
 
