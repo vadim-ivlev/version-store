@@ -19,9 +19,7 @@ version-store
 как это реализовано в Google Docs, был бы очень полезным. 
 Пользовательский-интерфейс может выглядеть, как показано на рисунке.
 
-<!-- <div style="text-align:center"> -->
-<img src=images/ui.jpg style="max-width:500px; border: 1px solid silver; margin-bottom: 10px;">
-<!-- </div> -->
+<img src=images/ui.jpg style="max-width:500px; margin-bottom: 10px;">
 
 ## Схема приложения
 
@@ -30,9 +28,7 @@ version-store
 
 API сервиса должен включать возможности 1) показа списка сохранённых версий, 2) извлечения отдельной версии документа, и 3) сохранения новой версии.
 
-<!-- <div style="text-align:center"> -->
 <img src="images/version-store-schema1.jpg" style="max-width:600px">
-<!-- </div> -->
 
 
 ## Безопасность
