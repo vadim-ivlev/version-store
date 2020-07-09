@@ -1,5 +1,5 @@
 
-<!-- <img src="images/title1.gif"> -->
+<img src="images/title1.gif">
 
 version-store
 ========
