@@ -143,9 +143,13 @@ https://docs.google.com/document/d/1Q1ExyY36btdnTNe5co_pB4UdWNk41gY3rP1geg1LJBo/
 
 
 
-Перезапуск Caddy и перестройка контейнера если что то изменилость в docker-compose 
+**Перезапуск Caddy** 
+ 
 ```
 dc restart version-store-caddy  
+```
+**Перестройка контейнера Caddy** если что то изменилость в docker-compose
+```
 dc up -d --build version-store-caddy     
 ```
 
@@ -168,4 +172,3 @@ docker exec version-store-es01  bash -c 'cd /migrations;./init_index.sh'
 
 <http://localhost:9000/#/overview?host=http:%2F%2Fversion-store-es01:9200>
 
-<iframe src="https://bbc.com"></iframe>
