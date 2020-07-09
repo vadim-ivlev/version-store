@@ -112,7 +112,7 @@ POST doc_versions/_doc/
 }
 ```
 Javascript код может выглядеть так
-```Javascript
+```javascript
 // Сохраняет версию документа docJson в базу данных
 async function saveVersion(docJson) {
   let res = await fetch(`${ENDPOINT}/_doc/`, {
