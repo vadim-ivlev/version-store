@@ -1,4 +1,6 @@
 *DS_Store
 .idea
 .vscode/settings.json
-
+version-store
+deploy/*
+!deploy/readme.md

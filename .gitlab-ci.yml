@@ -14,11 +14,14 @@ stages:
 deploy&copy:
     stage: deploy&copy
     script:
+        # компилируем исполняемый бинарный файл для Linux
+        - ./sh/build-linus-binary.sh  
+        # Наполняем файлами директорию deploy/
         - ./sh/build-deploy-directory.sh  
         - ./.import-ssh-key.sh "$PROD_RSA_PRIVATE_KEY"
-        # remove old dir on the server
+        # удаляем старую директорию на боевом сервере
         - ssh gitupdater@dockerweb.rgwork.ru 'rm -rf /home/gitupdater/'$IMAGE_NAME
-        # copy new dir on server
+        # копируем новую директорию deploy/ на боевой сервер
         - scp -pr $BUILD_PATH/deploy gitupdater@dockerweb.rgwork.ru:/home/gitupdater/$IMAGE_NAME
         # - rsync -av $BUILD_PATH/deploy gitupdater@dockerweb.rgwork.ru:/home/gitupdater/$IMAGE_NAME
         # change rights to filebeat (permition denied)

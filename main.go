@@ -49,7 +49,7 @@ func saveVersion(doc string) string {
 }
 
 func main() {
-	fmt.Println("Open http://localhost:8090")
+	fmt.Println("Version-Store goapp started at port :8090")
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		doc := getNewVersion()
 		res := saveVersion(doc)
