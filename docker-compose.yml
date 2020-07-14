@@ -60,16 +60,16 @@ services:
   
   # Тестовое golang приложение
   version-store-goapp:
-    # image: ubuntu:18.04
-    build:
-      context: .
+    image: ubuntu:18.04
+    # build:
+    #   context: .
     container_name: version-store-goapp
     restart: unless-stopped
     environment:
       - POST_URL=http://version-store-es01:9200/doc_versions/_doc/?pretty
-    # volumes:
-    #   - .:/app
-    # command: bash -c "cd /app && ./version-store" 
+    volumes:
+      - .:/app
+    command: bash -c "cd /app && ./version-store" 
 
 
 
