@@ -61,8 +61,6 @@ services:
   # Тестовое golang приложение
   version-store-goapp:
     image: ubuntu:18.04
-    # build:
-    #   context: .
     container_name: version-store-goapp
     restart: unless-stopped
     environment:

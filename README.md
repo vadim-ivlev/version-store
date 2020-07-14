@@ -118,7 +118,7 @@ POST ENDPOINT/_doc/
   "info": "This is an additional info2"
 }
 ```
-Javascript код может выглядеть так
+**Javascript** код может выглядеть так
 ```javascript
 // Сохраняет версию документа docJson в базу данных
 async function saveVersion(docJson) {
