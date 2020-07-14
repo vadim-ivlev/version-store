@@ -135,4 +135,14 @@ async function saveVersion(docJson) {
 <https://observablehq.com/@vadim-ivlev/first> 
 или <a href="http://inote.vadimivlev.com/page?owner=vadim.ivlev%7Cgmail&access=public&name=version-store">здесь</a>
 
+**golang**
 
+Чтобы добавить версию документа JSON необходимо выполнить POST запрос
+
+```go
+...
+resp, err := http.Post("http://version-store-es01:9200/doc_versions/_doc/", "application/json", bytes.NewBuffer([]byte(doc)))
+...
+```
+Приложение запущенное в докере должно принадлежать сети `auth_proxy_network`. 
+Полный пример смотрите в `main.go` и `docker-compose.yml`.

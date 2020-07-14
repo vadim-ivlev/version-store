@@ -24,9 +24,9 @@ func getNewVersion() string {
 	}`, unixTime, unixTime)
 }
 
-// saveVersion Сохраняет версию документа doc в базу данных
+// saveVersion Сохраняет версию документа doc в базу данных.
+// doc - это JSON документа с обязательными полями type, id, version_time.
 // По сути это один POST запрос.
-// https://stackoverflow.com/questions/24455147/how-do-i-send-a-json-string-in-a-post-request-in-go
 func saveVersion(doc string) string {
 
 	// Берем URL из переменной окружения.
