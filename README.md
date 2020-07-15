@@ -118,7 +118,12 @@ POST ENDPOINT/_doc/
   "info": "This is an additional info2"
 }
 ```
-**Javascript** код может выглядеть так
+
+
+**Javascript.** 
+
+Пример кода клиентского приложения
+
 ```javascript
 // Сохраняет версию документа docJson в базу данных
 async function saveVersion(docJson) {
@@ -135,9 +140,9 @@ async function saveVersion(docJson) {
 <https://observablehq.com/@vadim-ivlev/first> 
 или <a href="http://inote.vadimivlev.com/page?owner=vadim.ivlev%7Cgmail&access=public&name=version-store">здесь</a>
 
-**golang**
+**Golang.**
 
-Чтобы добавить версию документа JSON необходимо выполнить POST запрос
+Пример кода серверного приложения
 
 ```go
 ...
@@ -146,3 +151,6 @@ resp, err := http.Post("http://version-store-es01:9200/doc_versions/_doc/", "app
 ```
 Приложение запущенное в докере должно принадлежать сети `auth_proxy_network`. 
 Полный пример смотрите в `main.go` и `docker-compose.yml`.
+
+Работающий пример  <https://auth-proxy.rg.ru/apps/version-store-goapp/>
+

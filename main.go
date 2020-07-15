@@ -53,8 +53,9 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		doc := getNewVersion()
 		res := saveVersion(doc)
+		fmt.Fprintln(w, "Новая версия сохраняемого документа ----------------------")
 		fmt.Fprintln(w, doc)
-		fmt.Fprintln(w, "--------------------------------")
+		fmt.Fprintln(w, "_id и другие параметры сохраненной версии --------------------------------")
 		fmt.Fprintln(w, res)
 	})
 	http.ListenAndServe(":8090", nil)
