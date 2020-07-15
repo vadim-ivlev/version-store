@@ -1,5 +1,8 @@
 package main
 
+// Сохранение версии документа в version-store
+// Пример показывает как делать запросы к хранилищу версий version-store из Go приложений.
+
 import (
 	"bytes"
 	"fmt"
